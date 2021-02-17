@@ -37,7 +37,6 @@
 	-->
 	
 	<context:component-scan base-package="com.spring.view"></context:component-scan>
-	<mvc:annotation-driven></mvc:annotation-driven>
 	<!-- HttpMessageConverter를 구현한 모든 변환기 생성 -->
 	<mvc:annotation-driven></mvc:annotation-driven>
 	

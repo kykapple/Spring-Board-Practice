@@ -3,6 +3,7 @@ package com.spring.view.board;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +11,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.spring.biz.board.BoardService;
 import com.spring.biz.board.BoardVO;
+import com.spring.biz.board.BoardListVO;
+import com.spring.biz.board.BoardService;
 
 @Controller
 @SessionAttributes("board")	// Model에 board라는 이름으로 저장되는 데이터가 있으면 그 데이터를 session에도 자동으로 저장하라는 설정
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
+	
+	@RequestMapping("/dataTransform.do")
+	@ResponseBody	// 자바 객체를 Http 응답 프로토콜의 몸체로 변환하기 위해 사용
+	public BoardListVO dataTransform(BoardVO vo) {
+		vo.setSearchCondition("TITLE");
+		vo.setSearchKeyword("");
+		List<BoardVO> boardList = boardService.getBoardList(vo);
+		BoardListVO boardListVO = new BoardListVO();
+		boardListVO.setBoardList(boardList);
+		return boardListVO;
+	}
 	
 	// 검색 조건 목록 설정
 	@ModelAttribute("conditionMap")

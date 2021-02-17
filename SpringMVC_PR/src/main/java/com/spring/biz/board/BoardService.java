@@ -2,6 +2,8 @@ package com.spring.biz.board;
 
 import java.util.List;
 
+import com.spring.biz.board.BoardVO;
+
 public interface BoardService {
 	public void insertBoard(BoardVO vo);
 	

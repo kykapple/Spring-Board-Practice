@@ -1,6 +1,6 @@
 package com.spring.biz.board;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -63,7 +63,6 @@ public class BoardVO {
 	public void setSearchKeyword(String searchKeyword) {
 		this.searchKeyword = searchKeyword;
 	}
-	
 	public MultipartFile getUploadFile() {
 		return uploadFile;
 	}
