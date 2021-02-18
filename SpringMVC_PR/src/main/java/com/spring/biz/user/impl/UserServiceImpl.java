@@ -15,5 +15,9 @@ public class UserServiceImpl implements UserService {
 	public UserVO getUser(UserVO vo) {
 		return userDAO.getUser(vo);
 	}
-	
+
+	@Override
+	public boolean joinUser(UserVO vo) {
+		return userDAO.joinUser(vo);
+	}
 }

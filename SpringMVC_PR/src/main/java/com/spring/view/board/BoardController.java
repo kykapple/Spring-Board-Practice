@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,14 +49,14 @@ public class BoardController {
 	
 	// 글 등록
 	@RequestMapping(value = "/insertBoard.do")
-	public String insertBoard(BoardVO vo) throws IOException {
+	public String insertBoard(BoardVO vo, HttpSession session) throws IOException {
 		// 파일 업로드 처리
 		MultipartFile uploadFile = vo.getUploadFile();
 		if(!uploadFile.isEmpty()) {
 			String fileName = uploadFile.getOriginalFilename();
 			uploadFile.transferTo(new File("D:/" + fileName));
 		}
-		
+		vo.setWriter((String) session.getAttribute("userName"));
 		boardService.insertBoard(vo);
 		return "redirect:getBoardList.do";
 	}

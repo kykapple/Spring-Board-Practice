@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="BoardDAO">
+<mapper namespace="DAO">
 	<resultMap type="board" id="boardResult">
 		<id property="seq" column="SEQ"/>
 		<result property="title" column="TITLE"/>
@@ -48,6 +48,24 @@
 			AND CONTENT LIKE '%'||#{searchKeyword}||'%'
 		</if>
 		ORDER BY SEQ DESC
+	</select>
+	
+	<insert id="joinUser" parameterType="user">
+		<![CDATA[
+		INSERT INTO USERS (ID, PASSWORD, NAME, ROLE) VALUES(#{id},#{password},#{name},#{role})
+		]]>
+	</insert>
+	
+	<select id="getUser" parameterType="user" resultType="user">
+		<![CDATA[
+			SELECT * FROM USERS WHERE ID=#{id} and PASSWORD=#{password}
+		]]>
+	</select>
+	
+	<select id="getId" parameterType="user" resultType="user">
+		<![CDATA[
+			SELECT * FROM USERS WHERE ID=#{id}
+		]]>
 	</select>
 
 </mapper>

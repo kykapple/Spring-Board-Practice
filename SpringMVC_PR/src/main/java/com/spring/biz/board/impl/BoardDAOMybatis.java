@@ -15,26 +15,26 @@ public class BoardDAOMybatis {
 	
 	public void insertBoard(BoardVO vo) {
 		System.out.println("===> Mybatis로 insertBoard() 기능 처리");
-		mybatis.insert("BoardDAO.insertBoard", vo);
+		mybatis.insert("DAO.insertBoard", vo);
 	}
 	
 	public void updateBoard(BoardVO vo) {
 		System.out.println("===> Mybatis로 updateBoard() 기능 처리");
-		mybatis.update("BoardDAO.updateBoard", vo);
+		mybatis.update("DAO.updateBoard", vo);
 	}
 	
 	public void deleteBoard(BoardVO vo) {
 		System.out.println("===> Mybatis로 deleteBoard() 기능 처리");
-		mybatis.delete("BoardDAO.deleteBoard", vo);
+		mybatis.delete("DAO.deleteBoard", vo);
 	}
 	
 	public BoardVO getBoard(BoardVO vo) {
 		System.out.println("===> Mybatis로 getBoard() 기능 처리");
-		return mybatis.selectOne("BoardDAO.getBoard", vo);
+		return mybatis.selectOne("DAO.getBoard", vo);
 	}
 	
 	public List<BoardVO> getBoardList(BoardVO vo) {
 		System.out.println("===> Mybatis로 getBoardList() 기능 처리");
-		return mybatis.selectList("BoardDAO.getBoardList", vo);
+		return mybatis.selectList("DAO.getBoardList", vo);
 	}
 }

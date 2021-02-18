@@ -3,6 +3,7 @@ package com.spring.biz.user.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -14,17 +15,31 @@ import com.spring.biz.user.UserVO;
 @Repository("userDAO")
 public class UserDAO {
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
-	// SQL 명령어들
-	private final String USER_GET = "select * from users where id=? and password=?";
+	private SqlSession mybatis;
 	
 	// CRUD 기능의 메소드 구현
 	// 회원 등록
 	public UserVO getUser(UserVO vo) {
-		System.out.println("===> JDBC로 getUser() 기능 처리");
-		Object[] args = {vo.getId(), vo.getPassword()};
-		return jdbcTemplate.queryForObject(USER_GET, args, new UserRowMapper());
+		System.out.println("===> Mybatis로 getUser() 기능 처리");
+		return mybatis.selectOne("DAO.getUser", vo);
+	}
+	
+	public UserVO getId(UserVO vo) {
+		System.out.println("===> Mybatis로 아이디 중복 확인 기능 처리");
+		return mybatis.selectOne("DAO.getId", vo);
+	}
+	
+	// 회원 가입
+	public boolean joinUser(UserVO vo) {
+		System.out.println("===> Mybatis로 joinUser() 기능 처리");
+		if(getId(vo) != null) {
+			return false;
+		}
+		else {
+			vo.setRole("User");
+			mybatis.insert("DAO.joinUser", vo);
+			return true;
+		}
 	}
 }
 

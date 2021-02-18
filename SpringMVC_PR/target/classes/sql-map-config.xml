@@ -6,6 +6,7 @@
 	<!-- Alias 설정 -->
 	<typeAliases>
 		<typeAlias type="com.spring.biz.board.BoardVO" alias="board"></typeAlias>
+		<typeAlias type="com.spring.biz.user.UserVO" alias="user"/>
 	</typeAliases>
 	
 	<!-- Sql Mapper 설정 -->
