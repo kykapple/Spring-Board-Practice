@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+
+    <style>
+        .body { text-align: center; }
+        .table { margin: auto; }
+        .info { background-color: orange; }
+    </style>
+</head>
+<body class="body">
+
+    <h1>글 목록</h1>
+    <h3 th:text="${session.welcomeMessage}"></h3>
+    <a href="logout.do">로그아웃</a>
+
+    <table border="1" cellpadding="0" cellspacing="0" width="700" class="table">
+        <tr>
+            <th width="100" class="info">번호</th>
+            <th width="200" class="info">제목</th>
+            <th width="150" class="info">작성자</th>
+            <th width="150" class="info">등록일</th>
+            <th width="100" class="info">조회수</th>
+        </tr>
+
+        <tr th:each="board: ${boardList}">
+            <td th:text="${board.seq}"></td>
+            <td><a th:href="@{getBoard.do?(seq=${board.seq})}"><span th:text="${board.title}"></span></a></td>
+            <td th:text="${board.writer}"></td>
+            <td th:text="${#dates.format(board.regDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${board.cnt}"></td>
+        </tr>
+    </table>
+
+    <br>
+    <a href="insertForm.do">새글 등록</a>
+    <hr>
+
+    <span th:if="${pageMaker.prev}">
+        <a th:href="@{boardList.do?(page=${pageMaker.startPage-1})}" th:text="prev"></a>
+    </span>
+    <span th:each="pageNum: ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+        <a th:href="@{boardList.do?(page=${pageNum})}" th:text="${pageNum}"></a>
+    </span>
+    <span th:if="${pageMaker.next}">
+        <a th:href="@{boardList.do?(page=${pageMaker.endPage+1})}" th:text="next"></a>
+    </span>
+
+</body>
+</html>

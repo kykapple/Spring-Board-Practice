@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>글 상세</title>
+
+    <style>
+        .body { text-align: center; }
+        .table { margin: auto; }
+        .info { background-color: orange; }
+    </style>
+</head>
+<body class="body">
+
+    <h1>글 상세</h1>
+    <hr>
+
+    <form action="updateBoard.do" method="post">
+        <input type="hidden" name="seq" th:value="${board.seq}">
+        <table border="1" cellpadding="0" cellspacing="0" class="table">
+            <tr>
+                <td class="info" width="70">제목</td>
+                <td align="left"><input type="text" name="title" th:value="${board.title}"></td>
+            </tr>
+            <tr>
+                <td class="info">작성자</td>
+                <td align="left" th:text="${board.writer}"></td>
+            </tr>
+            <tr>
+                <td class="info">내용</td>
+                <td align="left"><textarea rows="10" cols="40" name="content" th:text="${board.content}"></textarea></td>
+            </tr>
+            <tr>
+                <td class="info">등록일</td>
+                <td align="left" th:text="${board.regDate}"></td>
+            </tr>
+            <tr>
+                <td class="info">조회수</td>
+                <td align="left" th:text="${board.cnt}"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="글 수정"></td>
+            </tr>
+        </table>
+    </form>
+
+    <hr>&nbsp;&nbsp;
+    <a th:href="@{deleteBoard.do?(seq=${board.seq})}">글 삭제</a>&nbsp;&nbsp;&nbsp;
+    <a href="boardList.do">글 목록</a>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.demo.repository.UserRepository">
+    <insert id="insertUser" parameterType="com.spring.demo.domain.UserVO">
+        INSERT INTO MAY_USER(ID, PASSWORD, NAME)
+        VALUES(#{id},#{password},#{name})
+    </insert>
+
+    <select id="getUser" parameterType="com.spring.demo.domain.UserVO" resultType="com.spring.demo.domain.UserVO">
+        SELECT * FROM MAY_USER WHERE ID=#{id} AND PASSWORD=#{password}
+    </select>
+
+</mapper>

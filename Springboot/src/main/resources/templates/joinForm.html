@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+
+    <style>
+        .body { text-align: center; }
+        .table { margin: auto; }
+        .info { background-color: orange; }
+    </style>
+</head>
+<body class="body">
+    <h1>회원가입</h1>
+    <hr>
+
+    <form action="join.do" method="post">
+        <table border="1" cellspacing="0" cellpadding="0" class="table">
+            <tr>
+                <td class="info">이름</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td class="info">아이디</td>
+                <td><input type="text" name="id"></td>
+            </tr>
+            <tr>
+                <td class="info">비밀번호</td>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr align="center">
+                <td colspan="2">
+                    <input type="submit" value="회원가입">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <hr>
+    <a href="/">돌아가기</a>
+
+</body>
+</html>
